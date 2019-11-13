@@ -63,16 +63,17 @@ documentation). The build tool can be invoked as
 
 the most interesting tasks are described in the following table
 
-|      Task       |                            Effect                            |
-| --------------- | ------------------------------------------------------------ |
-| `clean`         | Deletes the build directory                                  |
-| `classes`       | Assembles main classes                                       |
-| `testClasses`   | Assembles test classes                                       |
-| `test`          | Runs the unit tests                                          |
-| `build`         | Assembles and tests this project                             |
-| `javadoc`       | Generates Javadoc API documentation for the main source code |
-| `spotlessApply` | Applies code formatting steps to sourcecode in-place         |
-| `tasks`         | Lists all available tasks                                    |
+|      Task       |                              Effect                               |
+| --------------- | ----------------------------------------------------------------- |
+| `clean`         | Deletes the build directory                                       |
+| `classes`       | Assembles main classes                                            |
+| `testClasses`   | Assembles test classes                                            |
+| `test`          | Runs the unit tests                                               |
+| `build`         | Assembles and tests this project                                  |
+| `runClass`      | Runs the main method of a class given by its fully qualified name |
+| `javadoc`       | Generates Javadoc API documentation for the main source code      |
+| `spotlessApply` | Applies code formatting steps to sourcecode in-place              |
+| `tasks`         | Lists all available tasks                                         |
 
 typically one wants to compile and run tests with
 
@@ -111,6 +112,11 @@ results, and `doc` contains the documentation. Given the location of the
 compiled files, to run the `Example` class it's enough to specify
 `build/classes/java/main` as the *classpath* as in
 
-    java -cp build/classes/java/main my.pkg.Example
+    java -cp build/classes/java/main my.pkg.Example hello
 
-or to set the `CLASSPATH` environment variable once and for all.
+or to set the `CLASSPATH` environment variable once and for all; alternatively,
+one can use the `runClass` task as
+
+    ./gradlew runClass -PmainClass=my.pkg.Example --args=hello
+
+and the build tool will take care of the classpath.

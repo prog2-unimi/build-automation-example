@@ -36,6 +36,6 @@ public class Example {
   }
 
   public static void main(String[] args) {
-    System.out.println("This is no hello world!");
+    System.out.printf("This is no %s world!\n", args[0]);
   }
 }
