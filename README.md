@@ -45,10 +45,14 @@ package level `overview.html` and the project level  `overview.html` files).
 > **Dependencies on other tools**
 >
 > The *unit test*s are based on [JUnit 4](https://junit.org/junit4/) and the
-> documentation is redacted using
+> *documentation* is redacted using
 > [Javadoc](https://docs.oracle.com/en/java/javase/11/javadoc/)
 > (endowed with [MathJax](https://www.mathjax.org/) to allow for a more pleasant
-> mathematical notation). A basic introduction on such tools is provided during
+> mathematical notation); code *formatting* follows the
+> [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+> and is provided by
+> [Spotless](https://github.com/diffplug/spotless/tree/master/plugin-gradle),
+> A basic introduction of such tools is provided during
 > the class, any further detail is beside the scope of this repository (and the
 > course itself).
 >
