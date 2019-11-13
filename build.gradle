@@ -1,0 +1,27 @@
+plugins {
+    id 'java-library'
+    id 'com.diffplug.gradle.spotless' version '3.25.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+spotless {
+  java {
+    googleJavaFormat()
+  }
+}
+
+javadoc {
+  options.docTitle = 'Build Tool Example'
+  options.overview = 'src/overview.html'
+  options.links = [ 'https://docs.oracle.com/en/java/javase/11/docs/api/' ]
+  options.showFromPrivate()
+  options.footer = "<script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>"
+  options.addBooleanOption("-allow-script-in-comments", true)
+}
