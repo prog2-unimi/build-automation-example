@@ -8,13 +8,22 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
+  testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
 }
 
-spotless {
-  java {
-    googleJavaFormat()
-  }
+test {
+	useJUnitPlatform()
+	testLogging {
+		events 'passed', 'skipped', 'failed'
+	}
+}
+
+task runClass(type: JavaExec) {
+  dependsOn build
+  group = 'Execution'
+  description = 'Runs the main method of a class given by its fully qualified name'
+  main = project.hasProperty('mainClass') ? getProperty('mainClass') : 'my.pkg.Example'
+  classpath = sourceSets.main.runtimeClasspath
 }
 
 javadoc {
@@ -22,14 +31,12 @@ javadoc {
   options.overview = 'src/overview.html'
   options.links = [ 'https://docs.oracle.com/en/java/javase/11/docs/api/' ]
   options.showFromPrivate()
-  options.footer = "<script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>"
-  options.addBooleanOption("-allow-script-in-comments", true)
+  options.footer = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
+  options.addBooleanOption('-allow-script-in-comments', true)
 }
 
-task runClass(type: JavaExec) {
-  dependsOn build
-  group = "Execution"
-  description = "Runs the main method of a class given by its fully qualified name"
-  main = project.hasProperty("mainClass") ? getProperty("mainClass") : "my.pkg.Example"
-  classpath = sourceSets.main.runtimeClasspath
+spotless {
+  java {
+    googleJavaFormat()
+  }
 }
