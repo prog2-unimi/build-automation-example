@@ -46,7 +46,7 @@ package level `overview.html` and the project level  `overview.html` files).
 >
 > The *unit test*s are based on [JUnit 4](https://junit.org/junit4/) and the
 > documentation is redacted using
-> [Javadoc Technology](https://docs.oracle.com/javase/7/docs/technotes/guides/javadoc/)
+> [Javadoc](https://docs.oracle.com/en/java/javase/11/javadoc/)
 > (endowed with [MathJax](https://www.mathjax.org/) to allow for a more pleasant
 > mathematical notation). A basic introduction on such tools is provided during
 > the class, any further detail is beside the scope of this repository (and the
