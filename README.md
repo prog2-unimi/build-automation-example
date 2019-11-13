@@ -1,13 +1,16 @@
 # A Build Automation Example
 
 This repository contains an example of a [build automation](https://en.wikipedia.org/wiki/Build_automation)
-utility that can assist you in *compiling*, *testing*, *documenting*, and *formatting* a Java project.
+utility that can assist in automating the tasks related to *compiling*, *testing*, *documenting*, and *formatting* a Java project.
 
 The example is based on the [Gradle Build Tool](https://gradle.org/), it is not
 intended as a tutorial about it (there are
 [many](https://guides.gradle.org/creating-new-gradle-builds/)
 [pretty good](https://www.vogella.com/tutorials/Gradle/article.html)
-[ones](https://www.petrikainulainen.net/getting-started-with-gradle/) around), but to provide some very basic *scaffolding* that interested students of my [Porgrammazione II](https://prog2.di.unimi.it/) class can leverage to organize their homework and to automate the related building tasks.
+[ones](https://www.petrikainulainen.net/getting-started-with-gradle/) around), but to provide some very **minimal  scaffolding** that interested students of my [Porgrammazione II](https://prog2.di.unimi.it/) class can leverage to organize their homework and to automate the related building tasks.
+
+> The usage of this tool is absolutely **not required to pass the exam** and the
+> content of this repository is not part of the teaching material of the course.
 
 ## How to use it
 
@@ -31,20 +34,20 @@ The (relevant) content of this repository is
                         └── ExampleTest.java
 
 The `build.gradle` file is the tool configuration file, while `gradlew` and
-`gradlew.bat` are two executable file (respectively for Unix/Posix and Windows
-OSs) that can install and run the tool.
+`gradlew.bat` are two executable files (respectively for Unix/POSIX and Windows
+OSs) that can be used to (install and) run the tool.
 
-The `src` directory hierarchy contains a sample package `my.pkg` containing the
-`Example.java` implementation of an class, and `ExampleTest.java` of a set of
-test for such class; moreover it contains some additional documentation (the
+The `src` directory hierarchy contains a sample package `my.pkg` with the
+`Example.java` implementation of a class, and `ExampleTest.java` set of *unit
+tests* for such class; moreover it contains some additional documentation (the
 package level `overview.html` and the project level  `overview.html` files).
 
 > **Dependencies on other tools**
 >
-> The test are implemented using [JUnit 4](https://junit.org/junit4/) and the
-> documentation is redacted using the
+> The *unit test*s are based on [JUnit 4](https://junit.org/junit4/) and the
+> documentation is redacted using
 > [Javadoc Technology](https://docs.oracle.com/javase/7/docs/technotes/guides/javadoc/)
-> (endowed with [MathJax](https://www.mathjax.org/) to allow for more pleasant
+> (endowed with [MathJax](https://www.mathjax.org/) to allow for a more pleasant
 > mathematical notation). A basic introduction on such tools is provided during
 > the class, any further detail is beside the scope of this repository (and the
 > course itself).
