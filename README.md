@@ -44,7 +44,8 @@ package level `overview.html` and the project level  `overview.html` files).
 
 > **Dependencies on other tools**
 >
-> The *unit test*s are based on [JUnit 4](https://junit.org/junit4/) and the
+> The *unit test*s are based on [JUnit 5](https://junit.org/junit5/), *coverage*
+> is handled using [JaCoCo](https://www.eclemma.org/jacoco/), and the
 > *documentation* is redacted using
 > [Javadoc](https://docs.oracle.com/en/java/javase/11/javadoc/)
 > (endowed with [MathJax](https://www.mathjax.org/) to allow for a more pleasant
@@ -52,7 +53,7 @@ package level `overview.html` and the project level  `overview.html` files).
 > [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
 > and is provided by
 > [Spotless](https://github.com/diffplug/spotless/tree/master/plugin-gradle),
-> A basic introduction of such tools is provided during
+> A basic introduction of such tools is presented during
 > the class, any further detail is beside the scope of this repository (and the
 > course itself).
 >
@@ -106,15 +107,20 @@ hierarchy as follows
     │       ├── index.html
     │       └── ...
     └── reports
-       └── tests
-           └── test
-               ├── index.html
-               └── ...
+        ├── jacoco
+        │   └── test
+        │       └── html
+        │           ├── index.html
+        │           └── ...
+        └── tests
+            └── test
+                ├── index.html
+                └── ...
 
 where `clases` contains the compiled classes, `reports`  contains the unit test
-results, and `doc` contains the documentation. Given the location of the
-compiled files, to run the `Example` class it's enough to specify
-`build/classes/java/main` as the *classpath* as in
+and coverage results, and `docs` contains the generated documentation. Given the
+location of the compiled files, to run the `Example` class it's enough to
+specify `build/classes/java/main` as the *classpath* as in
 
     java -cp build/classes/java/main my.pkg.Example hello
 

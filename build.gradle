@@ -1,10 +1,11 @@
 plugins {
-    id 'java-library'
-    id 'com.diffplug.gradle.spotless' version '3.25.0'
+  id 'java'
+  id 'jacoco'
+  id 'com.diffplug.gradle.spotless' version '3.25.0'
 }
 
 repositories {
-    jcenter()
+  jcenter()
 }
 
 dependencies {
@@ -12,10 +13,11 @@ dependencies {
 }
 
 test {
-	useJUnitPlatform()
-	testLogging {
-		events 'passed', 'skipped', 'failed'
-	}
+  useJUnitPlatform()
+  testLogging {
+    events 'passed', 'skipped', 'failed'
+  }
+  finalizedBy jacocoTestReport
 }
 
 task runClass(type: JavaExec) {
