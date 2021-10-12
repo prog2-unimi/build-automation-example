@@ -1,11 +1,11 @@
 plugins {
   id 'java'
   id 'jacoco'
-  id 'com.diffplug.spotless' version '5.8.2'
+  id 'com.diffplug.spotless' version '5.16.0'
 }
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 dependencies {
@@ -25,7 +25,7 @@ task runClass(type: JavaExec) {
   dependsOn build
   group = 'Execution'
   description = 'Runs the main method of a class given by its fully qualified name'
-  main = project.hasProperty('mainClass') ? getProperty('mainClass') : 'my.pkg.Example'
+  mainClass = project.hasProperty('mainClass') ? getProperty('mainClass') : 'my.pkg.Example'
   classpath = sourceSets.main.runtimeClasspath
 }
 
