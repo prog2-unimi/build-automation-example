@@ -60,7 +60,7 @@ task UMLJavadoc(type: Javadoc) {
 spotless {
   enforceCheck false
   java {
-    googleJavaFormat('1.9')
+    googleJavaFormat('1.11.0')
     removeUnusedImports()
   }
 }

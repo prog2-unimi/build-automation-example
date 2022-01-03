@@ -3,7 +3,7 @@ package my.pkg;
 /**
  * An example subclass.
  *
- * <p> This is just an example, it is included to illustrate the UML Javadoc capabilities.
+ * <p>This is just an example, it is included to illustrate the UML Javadoc capabilities.
  */
 public class ASubClass extends Example {
 
@@ -15,5 +15,4 @@ public class ASubClass extends Example {
   public ASubClass(boolean aField) {
     super(aField);
   }
-
 }
