@@ -8,9 +8,14 @@ repositories {
   mavenCentral()
 }
 
+configurations {
+    umlDoclet
+}
+
 dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
   testImplementation 'org.hamcrest:hamcrest:2.2'
+  umlDoclet 'nl.talsmasoftware:umldoclet:2.0.15'
 }
 
 test {
@@ -36,6 +41,20 @@ javadoc {
   options.showFromPrivate()
   options.header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
   options.addBooleanOption('-allow-script-in-comments', true)
+}
+
+task UMLJavadoc(type: Javadoc) {
+  group = 'Documentation'
+  description = 'Generates Javadoc API documentation and UML diagrams for the main source code.'
+  source = sourceSets.main.allJava
+  classpath = sourceSets.main.compileClasspath
+  destinationDir = file("${buildDir}/docs/umljavadoc")
+  options.showFromPrivate()
+  options.docletpath = configurations.umlDoclet.files.asType(List)
+  options.doclet = 'nl.talsmasoftware.umldoclet.UMLDoclet'
+  options.addStringOption 'umlImageDirectory', 'images'
+  options.addStringOption 'umlImageFormat', 'svg,png'
+  options.addStringOption 'Xdoclint:none', '-quiet'
 }
 
 spotless {
