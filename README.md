@@ -24,6 +24,7 @@ The (relevant) content of this repository is
         │   └── java
         │       └── my
         │           └── pkg
+        │               ├── ASubClass.java
         │               ├── Example.java
         │               └── package-info.java
         ├── overview.html
@@ -38,9 +39,10 @@ The `build.gradle` file is the tool configuration file, while `gradlew` and
 OSs) that can be used to (install and) run the tool.
 
 The `src` directory hierarchy contains a sample package `my.pkg` with the
-`Example.java` implementation of a class, and `ExampleTest.java` set of *unit
-tests* for such class; moreover it contains some additional documentation (the
-package level `overview.html` and the project level `overview.html` files).
+`Example.java` implementation of a class, its subclass `ASubClass.java`, and
+`ExampleTest.java` set of *unit tests* for such class; moreover it contains some
+additional documentation (the package level `overview.html` and the project
+level `overview.html` files).
 
 > **Dependencies on other tools**
 >
@@ -104,6 +106,7 @@ hierarchy as follows
     │       ├── main
     │       │   └── my
     │       │       └── pkg
+    │       │           ├── ASubClass.class
     │       │           └── Example.class
     │       └── test
     │           └── my
