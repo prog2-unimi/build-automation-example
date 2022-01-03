@@ -35,6 +35,10 @@ public class Example {
     return aField;
   }
 
+  /**
+   * The main method of this class.
+   * @param args the command line arguments.
+   */
   public static void main(String[] args) {
     System.out.printf("This is no %s world!\n", args[0]);
   }
