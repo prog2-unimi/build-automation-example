@@ -21,11 +21,11 @@ The (relevant) content of this repository is
     ├── gradlew.bat
     └── src
         ├── main
-        │   └── java
-        │       └── my
-        │           └── pkg
-        │               ├── Example.java
-        │               └── package-info.java
+        │   └── java
+        │       └── my
+        │           └── pkg
+        │               ├── Example.java
+        │               └── package-info.java
         ├── overview.html
         └── test
             └── java
@@ -37,10 +37,10 @@ The `build.gradle` file is the tool configuration file, while `gradlew` and
 `gradlew.bat` are two executable files (respectively for Unix/POSIX and Windows
 OSs) that can be used to (install and) run the tool.
 
-The `src` directory hierarchy contains a sample package `my.pkg` with the
+The `src` directory hierarchy contains a sample package `my.pkg` with the
 `Example.java` implementation of a class, and `ExampleTest.java` set of *unit
 tests* for such class; moreover it contains some additional documentation (the
-package level `overview.html` and the project level  `overview.html` files).
+package level `overview.html` and the project level `overview.html` files).
 
 > **Dependencies on other tools**
 >
@@ -61,7 +61,7 @@ package level `overview.html` and the project level  `overview.html` files).
 > so that no manual installation and configuration will be needed*.
 
 One can add his packages, implementations and documentation to the
-`src` directory hierarchy (and possibly eliminate the sample code and
+`src` directory hierarchy (and possibly eliminate the sample code and
 documentation). The build tool can be invoked as
 
     ./gradlew task...
@@ -93,38 +93,38 @@ hierarchy as follows
 
     build
     ├── classes
-    │   └── java
-    │       ├── main
-    │       │   └── my
-    │       │       └── pkg
-    │       │           └── Example.class
-    │       └── test
-    │           └── my
-    │               └── pkg
-    │                   └── ExampleTest.class
+    │   └── java
+    │       ├── main
+    │       │   └── my
+    │       │       └── pkg
+    │       │           └── Example.class
+    │       └── test
+    │           └── my
+    │               └── pkg
+    │                   └── ExampleTest.class
     ├── docs
-    │   └── javadoc
-    │       ├── index.html
-    │       └── ...
+    │   └── javadoc
+    │       ├── index.html
+    │       └── ...
     └── reports
-        ├── jacoco
-        │   └── test
-        │       └── html
-        │           ├── index.html
+        ├── jacoco
+        │   └── test
+        │       └── html
+        │           ├── index.html
         │           └── ...
-        └── tests
-            └── test
-                ├── index.html
-                └── ...
+        └── tests
+            └── test
+                ├── index.html
+                └── ...
 
-where `clases` contains the compiled classes, `reports`  contains the unit test
+where `clases` contains the compiled classes, `reports` contains the unit test
 and coverage results, and `docs` contains the generated documentation. Given the
 location of the compiled files, to run the `Example` class it's enough to
-specify `build/classes/java/main` as the *classpath* as in
+specify `build/classes/java/main` as the *classpath* as in
 
     java -cp build/classes/java/main my.pkg.Example hello
 
-or to set the `CLASSPATH` environment variable once and for all; alternatively,
+or to set the `CLASSPATH` environment variable once and for all; alternatively,
 one can use the `runClass` task as
 
     ./gradlew runClass -PmainClass=my.pkg.Example --args=hello
