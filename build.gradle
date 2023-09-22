@@ -1,7 +1,7 @@
 plugins {
   id 'java'
   id 'jacoco'
-  id 'com.diffplug.spotless' version '5.16.0'
+  id 'com.diffplug.spotless' version '6.21.0'
 }
 
 repositories {
@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-  testImplementation(platform('org.junit:junit-bom:5.9.1'))
-  testImplementation('org.junit.jupiter:junit-jupiter')
-  testImplementation('org.hamcrest:hamcrest:2.2')
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation('org.hamcrest:hamcrest:2.2')
 }
 
 test {
@@ -42,7 +42,7 @@ javadoc {
 spotless {
   enforceCheck false
   java {
-    googleJavaFormat('1.15.0')
+    googleJavaFormat('1.17.0')
     removeUnusedImports()
     endWithNewline()
   }
