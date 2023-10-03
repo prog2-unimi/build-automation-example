@@ -9,8 +9,10 @@ intended as a tutorial about it (there are
 [pretty good](https://www.vogella.com/tutorials/Gradle/article.html)
 [ones](https://www.petrikainulainen.net/getting-started-with-gradle/) around), but to provide some very **minimal  scaffolding** that interested students of my [Porgrammazione II](https://prog2.di.unimi.it/) class can leverage to organize their homework and to automate the related building tasks.
 
-> The usage of this tool is absolutely **not required to pass the exam** and the
-> content of this repository is not part of the teaching material of the course.
+> A deep understanding of how to configure and modify the settings of this tool
+> is absolutely **not required to pass the exam**; to complete homework and
+> project it's enough to know how to use the tool as pre-configured by the
+> teacher.
 
 ## How to use it
 
