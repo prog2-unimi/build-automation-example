@@ -1,7 +1,7 @@
 plugins {
   id 'java'
   id 'jacoco'
-  id 'com.diffplug.spotless' version '6.21.0'
+  id 'com.diffplug.spotless' version '6.22.0'
 }
 
 repositories {
@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation('org.hamcrest:hamcrest:2.2')
+  testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
+  testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+  testImplementation('org.hamcrest:hamcrest:2.2')
 }
 
 test {
@@ -25,18 +25,19 @@ test {
 task runClass(type: JavaExec) {
   dependsOn build
   group = 'Execution'
-  description = 'Runs the main method of a class given by its fully qualified name'
+  description = 'Runs the main method of a class given its fully qualified name.'
   mainClass = project.hasProperty('mainClass') ? project.getProperty('mainClass') : 'my.pkg.Example'
   classpath = sourceSets.main.runtimeClasspath
 }
 
 javadoc {
-  options.docTitle = 'Build Tool Example'
+  options.docTitle = 'Build Automation Tool Example'
   options.overview = 'src/overview.html'
-  options.links = [ 'https://docs.oracle.com/en/java/javase/11/docs/api/' ]
+  options.links = [ 'https://docs.oracle.com/en/java/javase/17/docs/api/' ]
   options.showFromPrivate()
   options.header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
   options.addBooleanOption('-allow-script-in-comments', true)
+  javadoc.options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 spotless {
