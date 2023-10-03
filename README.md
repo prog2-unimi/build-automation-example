@@ -119,7 +119,7 @@ hierarchy as follows
                 ├── index.html
                 └── ...
 
-where `clases` contains the compiled classes, `reports` contains the unit test
+where `classes` contains the compiled classes, `reports` contains the unit test
 and coverage results, and `docs` contains the generated documentation. Given the
 location of the compiled files, to run the `Example` class it's enough to
 specify `build/classes/java/main` as the *classpath* as in
