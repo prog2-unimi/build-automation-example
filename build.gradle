@@ -1,12 +1,12 @@
 plugins {
   id 'java'
   id 'jacoco'
-  id 'com.diffplug.spotless' version '6.22.0'
+  id 'com.diffplug.spotless' version '7.0.4'
 }
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
+    languageVersion = JavaLanguageVersion.of(21)
   }
 }
 
@@ -18,29 +18,39 @@ repositories {
 }
 
 dependencies {
-  testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
-  testRuntimeOnly('org.junit.platform:junit-platform-launcher')
-  testImplementation('org.hamcrest:hamcrest:2.2')
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-test {
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+  options.compilerArgs.add('-Xlint:all')
+  options.compilerArgs.add('-Werror') 
+}
+
+tasks.named('test') {
   useJUnitPlatform()
   testLogging {
-    events 'passed', 'skipped', 'failed'
+    events 'skipped', 'failed'
+    afterSuite { desc, result ->
+      if (!desc.parent) {
+        println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+      }
+    }
   }
-  finalizedBy jacocoTestReport
   defaultCharacterEncoding = 'UTF-8'
+  finalizedBy jacocoTestReport
 }
 
 tasks.withType(JavaExec) {
-  enableAssertions = project.hasProperty('enableAssertions') ? project.getProperty('enableAssertions') : false
+  enableAssertions = !providers.systemProperty('disableAssertions').isPresent()
 }
 
-task runClass(type: JavaExec) {
+tasks.register('runClass', JavaExec) {
   dependsOn build
   group = 'Execution'
   description = 'Runs the main method of a class given its fully qualified name.'
-  mainClass = project.hasProperty('mainClass') ? project.getProperty('mainClass') : 'my.pkg.Example'
+  mainClass = providers.systemProperty('mainClass').getOrElse('my.pkg.Example')
   classpath = sourceSets.main.runtimeClasspath
   defaultCharacterEncoding = 'UTF-8'
 }
@@ -54,16 +64,29 @@ javadoc {
     overview = 'src/overview.html'
     header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
     showFromPrivate()
-    addStringOption 'Xdoclint:none', '-quiet'
-    addBooleanOption '-allow-script-in-comments', true 
+    addBooleanOption 'Xdoclint:all', true
+    addBooleanOption 'Werror', true
+    addBooleanOption '-allow-script-in-comments', true
   }
 }
 
 spotless {
-  enforceCheck false
+  enforceCheck = false
   java {
-    googleJavaFormat('1.17.0')
+    googleJavaFormat('1.24.0')
     removeUnusedImports()
+    leadingTabsToSpaces(2)
     endWithNewline()
+    licenseHeaderFile 'src/licenseHeaderFile.txt'
   }
+}
+
+tasks.register('cleanActual', Delete) {
+  delete fileTree('tests').matching {
+    include '**/actual-*.txt'
+  }
+}
+
+clean {
+  dependsOn cleanActual
 }
