@@ -77,7 +77,7 @@ the most interesting tasks are described in the following table
 | `testClasses`   | Assembles test classes                                            |
 | `test`          | Runs the unit tests                                               |
 | `build`         | Assembles and tests this project                                  |
-| `runClass`      | Runs the main method of a class given by its fully qualified name |
+| `run`           | Runs the main method of a class given by its fully qualified name |
 | `javadoc`       | Generates Javadoc API documentation for the main source code      |
 | `spotlessApply` | Applies code formatting steps to sourcecode in-place              |
 | `tasks`         | Lists all available tasks                                         |
@@ -127,8 +127,8 @@ specify `build/classes/java/main` as the *classpath* as in
     java -cp build/classes/java/main my.pkg.Example hello
 
 or to set the `CLASSPATH` environment variable once and for all; alternatively,
-one can use the `runClass` task as
+one can use the `run` task as
 
-    ./gradlew runClass -PmainClass=my.pkg.Example --args=hello
+    ./gradlew run -PmainClass=my.pkg.Example --args=hello
 
 and the build tool will take care of the classpath.

@@ -1,31 +1,44 @@
 plugins {
   id 'java'
+  id 'application'
   id 'jacoco'
-  id 'com.diffplug.spotless' version '7.0.4'
+  id 'com.diffplug.spotless' version '8.0.0'
 }
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
+    languageVersion = JavaLanguageVersion.of(25)
   }
 }
-
-compileJava.options.encoding = 'UTF-8'
-compileTestJava.options.encoding = 'UTF-8'
 
 repositories {
   mavenCentral()
 }
 
+configurations {
+  umlDoclet
+}
+
 dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  umlDoclet 'nl.talsmasoftware:umldoclet:2.2.0'
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
-  options.compilerArgs.add('-Xlint:all')
-  options.compilerArgs.add('-Werror') 
+  options.compilerArgs += ['-Xlint:all', '-Werror']
+}
+
+tasks.withType(JavaExec).configureEach {
+  jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+  defaultCharacterEncoding = 'UTF-8'
+  enableAssertions = !providers.gradleProperty('disableAssertions').isPresent()
+}
+
+tasks.withType(Test).configureEach {
+  jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+  defaultCharacterEncoding = 'UTF-8'
 }
 
 tasks.named('test') {
@@ -38,55 +51,41 @@ tasks.named('test') {
       }
     }
   }
-  defaultCharacterEncoding = 'UTF-8'
   finalizedBy jacocoTestReport
 }
 
-tasks.withType(JavaExec) {
-  enableAssertions = !providers.systemProperty('disableAssertions').isPresent()
-}
+def defaultMain = 'it.unimi.di.prog2.h02.SalveMondo'
 
-tasks.register('runClass', JavaExec) {
-  dependsOn build
-  group = 'Execution'
-  description = 'Runs the main method of a class given its fully qualified name.'
-  mainClass = providers.systemProperty('mainClass').getOrElse('my.pkg.Example')
-  classpath = sourceSets.main.runtimeClasspath
-  defaultCharacterEncoding = 'UTF-8'
+application {
+  mainClass = providers.gradleProperty('mainClass').getOrElse(defaultMain)
 }
 
 javadoc {
+  exclude('utils/**', 'clients/**')
   options {
+    description = 'Generates Javadoc API documentation and UML diagrams for the main source code.'
     encoding = 'UTF-8'
     charSet = 'UTF-8'
-    links = [ 'https://docs.oracle.com/en/java/javase/17/docs/api/' ]
+    links = [ 'https://docs.oracle.com/en/java/javase/25/docs/api/' ]
     docTitle = 'Build Automation Tool Example'
     overview = 'src/overview.html'
     header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
+    docletpath = configurations.umlDoclet.files.asType(List)
+    doclet = 'nl.talsmasoftware.umldoclet.UMLDoclet'
     showFromPrivate()
-    addBooleanOption 'Xdoclint:all', true
-    addBooleanOption 'Werror', true
-    addBooleanOption '-allow-script-in-comments', true
+    addBooleanOption('Xdoclint:all', true)
+    addBooleanOption('Werror', true)
+    addBooleanOption('-allow-script-in-comments', true)
   }
 }
 
 spotless {
   enforceCheck = false
   java {
-    googleJavaFormat('1.24.0')
+    googleJavaFormat('1.28.0')
     removeUnusedImports()
     leadingTabsToSpaces(2)
     endWithNewline()
-    licenseHeaderFile 'src/licenseHeaderFile.txt'
+    licenseHeaderFile('src/licenseHeaderFile.txt')
   }
-}
-
-tasks.register('cleanActual', Delete) {
-  delete fileTree('tests').matching {
-    include '**/actual-*.txt'
-  }
-}
-
-clean {
-  dependsOn cleanActual
 }
